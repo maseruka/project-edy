@@ -1,24 +1,159 @@
-.App {
+
+.see{
+  border: 1px solid #fff;
+}
+.mother{
+  height: auto;
+  width: 100%;
+  background: #191A1B;
+  overflow: hidden;
+}
+.box{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  background: #1D1F20;
+  color: #606a6f;
+  padding: 10px;
+  box-shadow: 1px 3px 4px rgba(22,23,24, 1);
+  -webkit-box-shadow: 1px 3px 4px rgba(22,23,24, 1);
+}
+.one{
+  height: 155px;
+}
+.two{
+  height: 215px;
+}
+.three{
+  height: 235px;
+}
+.four{
+  height: 390px;
+}
+.fours{
+  height: 390px;
+}
+.right{
+  margin-top: 0px !important;
+}
+.center{
   text-align: center;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.bige{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 36px;
+  width: 100%;
+  padding: 6px;
+  background: #161718;
+  border-radius: 5px;
+  border: 1px solid #6ccbdd;
+  color: #6dcee0;
+}
+.bige:active{
+  outline: 0!important;
+}
+.bige:focus{
+  outline: 0!important;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
+input:active{
+  outline: 0!important;
+}
+input:focus{
+  outline: 0!important;
+}
+.scroll{
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.gld{
+  width: 100%;
+  font-size: 20px;
+  padding: 6px;
+  border-radius: 5px;
+  margin-top: 10px;
+  background: #00bbf9;
+  color: #333;
+  height: 60px;
+}
+::-webkit-scrollbar{
+    width: 10px;
+  }
+::-webkit-scrollbar-track{
+    background: #191a1b;
+  }
+  ::-webkit-scrollbar-thumb{
+    border-radius: 4px;
+    background: #111212;
+    padding-left: 5px;
+  }
+.gbn{
+  width: 100%;
+  margin-top: 15px;
+  padding: 12px!important;
+  font-weight: 600!important;
+  background: #252829;
+  color: #f64d43;
+}
+.inp{
+  margin-top: 10px;
+  margin-left: 30px;
+  width: 126px;
+  font-size: 22px;
+  border-radius: 5px;
+  background: #161718;
+  border: none;
+  color: #6dcee0;
+  padding-left: 10px;
+  font-weight: 300
+}
+.small{
+  font-size: 13px;
+}
+.padd{
   padding: 20px;
-  color: white;
 }
-
-.App-intro {
-  font-size: large;
+.pass{
+  width: 90%;
+  padding: 5px;
+  color: #6dcee0;
+  font-weight: '300';
+  border: none;
+  background: none;
+  margin-left: -5px;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.kal{
+  border-radius: 5px;
+  background: #161718;
+}
+.top{
+  margin-top: 20px;
+}
+.rite{
+  text-align: right;
+}
+.rela{
+  position: relative;
+}
+.light{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #63ff63;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+}
+.bot{
+  border-bottom: 1px solid #191a1b;
+}
+.todo{
+  font-size: 30px;
+}
+.SELL{
+  color: #6ccddf;
+}
+.BUY{
+  color: #f2b733;
 }
