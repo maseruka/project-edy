@@ -8,8 +8,8 @@ export default class Orders extends Component {
             <div className="col-lg-6">{ this.props.time }</div>
     		<div className="col-lg-12">
             <h5>{ this.props.todon }</h5>
-            <span>Filled: { this.props.filled }</span><br/>
-            <span>Remaining: { this.props.rem }</span>
+            <span className="order">Filled: { this.props.filled }</span><br/>
+            <span className="order">Remaining: { this.props.rem }</span>
             </div>
     	</div>
     	);

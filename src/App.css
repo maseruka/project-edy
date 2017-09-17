@@ -27,11 +27,14 @@
 .three{
   height: 235px;
 }
+.threes{
+  height: 265px;
+}
 .four{
   height: 390px;
 }
 .fours{
-  height: 390px;
+  height: 360px;
 }
 .right{
   margin-top: 0px !important;
@@ -127,6 +130,15 @@ input:focus{
   border-radius: 5px;
   background: #161718;
 }
+.kal2{
+  border-radius: 5px;
+  background: #161718;
+  margin-right: 5px;
+}
+.kal2 input{
+  width: 80%;
+  margin-left: 5px;
+}
 .top{
   margin-top: 20px;
 }
@@ -149,11 +161,123 @@ input:focus{
   border-bottom: 1px solid #191a1b;
 }
 .todo{
-  font-size: 30px;
+  font-size: 35px;
+  font-weight: 400;
+  letter-spacing: 2.5px;
 }
 .SELL{
   color: #6ccddf;
 }
 .BUY{
   color: #f2b733;
+}
+.lef{
+  margin-left: 5px;
+}
+.order{
+  font-size: 18px;
+}
+
+
+
+
+
+/*new css*/
+
+.full{
+  min-height: 100vh;
+}
+.about{
+  min-height: 90vh;
+}
+.sixty{
+  height: 55vh;
+}
+.six{
+  height: 50vh;
+}
+.seventy{
+  height: 70vh;
+}
+.fourty{
+  height: 45vh;
+}
+.thirty{
+  height: 30vh;
+}
+.tops{
+  margin-top: 15px;
+}
+.bots{
+  margin-bottom: 15px;
+}
+.parent{
+  background: #191a1b;
+}
+.child{
+  background: #1D1F20;
+  border-radius: 5px;
+  color: #606a6f;
+  padding: 10px;
+  box-shadow: 1px 3px 4px rgba(22,23,24, 1);
+  -webkit-box-shadow: 1px 3px 4px rgba(22,23,24, 1);
+}
+.coin-value{
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 36px;
+  width: 90%;
+  padding: 6px;
+  background: #161718;
+  border-radius: 5px;
+  border: 1px solid #6ccbdd;
+  color: #6dcee0;
+}
+.start{
+  width: 90%;
+  font-size: 18px;
+  padding: 6px;
+  border-radius: 5px;
+  margin-top: 10px;
+  background: #00bbf9;
+  color: #333;
+  height: 50px;
+  font-weight: 500;
+}
+.bom{
+  margin-left: 2px;
+}
+.aright{
+  text-align: right;
+}
+.light2{
+  position: absolute;
+  top: 83%;
+  left: 0;
+  background: #63ff63;
+  height: 20px;
+  width: 20px;
+  border-radius: 20px;
+}
+.actions{
+  font-size: 11px;
+  font-weight: 700;
+  margin: 5px;
+  padding: 0;
+}
+.actions:hover{
+  cursor: pointer;
+}
+.remo{
+  color: #e44739;
+}
+.addo{
+  color: #6cd7eb;
+}
+.bog{
+  margin-bottom: 50px;
+}
+.soo{
+  font-size: 12.8px;
+  opacity: .8;
 }
