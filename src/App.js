@@ -32,7 +32,7 @@ class App extends Component {
   }
   createNewSell(){
       let rand = randomize('Aaxs0', 10);
-      this.store.sellConfiguration.push({id: rand, todo: 'SELL', put: '%'})
+      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%'})
   }
   removeLastSell(){
       this.store.sellConfiguration.pop()
@@ -74,7 +74,10 @@ class App extends Component {
                   ))
       }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
-            <Dex key={sells.id} todo={sells.todo} put={sells.put}/>
+            <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
+            ))
+      let truckSellAndBuyMap = this.store.sellConfiguration.map((sellsBuys) => (
+            <span key={sellsBuys.id}>selKey: {sellsBuys.id} : sell: {sellsBuys.sell} : at: {sellsBuys.at}, </span>
             ))
     return (
       <div className="full container-fluid parent">
@@ -139,7 +142,10 @@ class App extends Component {
       <div className="col-lg-6 monitor full">
       <div className="row">
       <div className="col-lg-12 ">
-      <div className="six top child">graph</div>
+      <div className="six top child">
+      <p>Track values</p>
+      <p>[ { truckSellAndBuyMap } ]</p>
+      </div>
       </div>
       </div>
       <div className="row">
