@@ -28,12 +28,11 @@ class App extends Component {
                   }
             }
       }else{
-            this.setState({contentShowed: false})
       }
   }
   createNewSell(){
       let rand = randomize('Aaxs0', 10);
-      this.store.sellConfiguration.push({id: rand, todo: 'SELL'})
+      this.store.sellConfiguration.push({id: rand, todo: 'SELL', put: '%'})
   }
   removeLastSell(){
       this.store.sellConfiguration.pop()
@@ -75,7 +74,7 @@ class App extends Component {
                   ))
       }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
-            <Dex key={sells.id} todo={sells.todo} />
+            <Dex key={sells.id} todo={sells.todo} put={sells.put}/>
             ))
     return (
       <div className="full container-fluid parent">
@@ -97,6 +96,10 @@ class App extends Component {
       <div className="col-lg-4">High</div>
       <div className="col-lg-7 aright"><span className="fa fa-btc"></span> 0.000000553</div>
       </div>
+      <div className="top">
+      <center><button className="btn gbna">CANCEL</button></center>
+      <center><button className="btn gbna">CANCEL AND SELL</button></center>
+      </div>
       </div>
       </div>
       </div>
@@ -117,7 +120,7 @@ class App extends Component {
       <div className="col-lg-12">
       <div className="thirty top child">
       <center>Buy Configuration</center>
-      <Dex todo="BUY"/>
+      <Dex todo="BUY" put="btc"/>
       </div>
       </div>
       </div>
@@ -126,8 +129,8 @@ class App extends Component {
       <div className="seventy top child scroll">
       <center>Sell Configuration</center>
       { sellConfigurationMap }
-      <p className="actions remo" onClick = { this.removeLastSell.bind(this)}><span className="fa fa-trash"></span> Remove sells</p>
-      <p className="actions addo bog" onClick = { this.createNewSell.bind(this)}><span className="fa fa-plus"></span> Add sells</p>
+      <p className="actions remo" onClick = { this.removeLastSell.bind(this)}><span className="fa fa-trash"></span> Remove sell</p>
+      <p className="actions addo bog" onClick = { this.createNewSell.bind(this)}><span className="fa fa-plus"></span> Add sell</p>
       </div>
       </div>
       </div>
