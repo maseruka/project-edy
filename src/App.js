@@ -14,7 +14,13 @@ class App extends Component {
       this.store = new Store()
   }
   startGraph(){
-      
+      this.store.openOrders = [] 
+      if (this.store.openOrders.length === 0) {
+            this.store.openOrders.push(this.store.buyConfiguration[0])
+      }
+      this.store.sellConfiguration.map((sells) => {
+           return this.store.openOrders.push(sells)
+      })
   }
   showContent(e){
       const coinValue = e.target.value
@@ -31,8 +37,8 @@ class App extends Component {
       }
   }
   createNewSell(){
-      let rand = randomize('Aaxs0', 10);
-      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%'})
+      let rand = randomize(10);
+      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%', time: '9:23:11', todon: '0.0000000', filled: '0.0000000', rem: '0.0000000'})
   }
   removeLastSell(){
       this.store.sellConfiguration.pop()
@@ -40,44 +46,18 @@ class App extends Component {
   render() {
       let openOrdersMap;
       let closedOrdersMap;
-      let closedOrders = [
-                           {
-                            todo: 'BUY', 
-                            time: '9:23:11', 
-                            todon: '0.0000000',
-                            filled: '0.0000000', 
-                            rem: '0.0000000'
-                           },
-                           {
-                            todo: 'SELL', 
-                            time: '9:20:15', 
-                            todon: '0.0000000',
-                            filled: '0.0000000', 
-                            rem: '0.0000000'
-                           }
-                         ]
-      let openOrders = [
-                         {
-                           todo: 'SELL', 
-                           time: '12:23:11', 
-                           todon: '0.0000000', 
-                           filled: '0.0000000', 
-                           rem: '0.0000000'
-                        }
-                      ]
-      if (this.state.contentShowed !== false ) {
-            openOrdersMap = openOrders.map((open) => (
-                  <Orders key={open.time} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
+      let closedOrders = []
+            openOrdersMap = this.store.openOrders.map((open) => (
+                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
                   ))
             closedOrdersMap = closedOrders.map((open) => (
-                  <Orders key={open.time} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
+                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
                   ))
-      }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
             <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
             ))
-      let truckSellAndBuyMap = this.store.sellConfiguration.map((sellsBuys) => (
-            <span key={sellsBuys.id}>selKey: {sellsBuys.id} : sell: {sellsBuys.sell} : at: {sellsBuys.at}, </span>
+      let truckSellAndBuyMap = this.store.openOrders.map((sellsBuys) => (
+            <span key={sellsBuys.id}> sell: {sellsBuys.at} </span>
             ))
     return (
       <div className="full container-fluid parent">
@@ -123,7 +103,7 @@ class App extends Component {
       <div className="col-lg-12">
       <div className="thirty top child">
       <center>Buy Configuration</center>
-      <Dex todo="BUY" put="btc"/>
+      <Dex todo="BUY" put="btc" buy={this.store.buyConfiguration}/>
       </div>
       </div>
       </div>
@@ -150,7 +130,7 @@ class App extends Component {
       </div>
       <div className="row">
       <div className="col-lg-6">
-      <div className="six top child">
+      <div className="six top child scroll">
       <center>Open Orders</center>
       { openOrdersMap }
       <p className="bog"></p>

@@ -7,7 +7,7 @@ export default class Dex extends Component {
     if (this.props.store !== undefined) {
         this.props.store.sell = newSellValue
     }else{
-
+        this.props.buy[0].buy = newSellValue
     }
   }
   setPer(e){
@@ -15,7 +15,7 @@ export default class Dex extends Component {
     if (this.props.store !== undefined) {
         this.props.store.at = newPerValue 
     }else{
-        
+        this.props.buy[0].at = newPerValue
     }
   }
   render() {
