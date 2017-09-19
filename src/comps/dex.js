@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import { observer } from 'mobx-react'
 @observer
 export default class Dex extends Component {
-    constructor(props){
-        super(props)
-    }
   setSell(e){
     let newSellValue = e.target.value
-    this.props.store.sell = newSellValue
+    if (this.props.store !== undefined) {
+        this.props.store.sell = newSellValue
+    }else{
+
+    }
   }
   setPer(e){
     let newPerValue = e.target.value
-    this.props.store.at = newPerValue
+    if (this.props.store !== undefined) {
+        this.props.store.at = newPerValue 
+    }else{
+        
+    }
   }
   render() {
     let put = '%'
