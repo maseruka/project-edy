@@ -3,6 +3,7 @@ import { observer } from 'mobx-react'
 import Store from './Store/store'
 import Dex from './comps/dex.js'
 import Orders from './comps/orders.js'
+import Chart from './comps/Chart.js'
 
 var randomize = require('randomatic');
 
@@ -10,36 +11,59 @@ var randomize = require('randomatic');
 class App extends Component {
   constructor(props){
       super(props)
-      this.state = {contentShowed: false}
       this.store = new Store()
   }
   startGraph(){
       this.store.openOrders = [] 
-      if (this.store.openOrders.length === 0) {
-            this.store.openOrders.push(this.store.buyConfiguration[0])
+      this.store.allConfigs = []
+      if(this.store.globalCoin !== ''){
+            this.store.allConfigs.push(this.store.buyConfiguration[0].at)
+            if (this.store.openOrders.length === 0) {
+                  this.store.openOrders.push(this.store.buyConfiguration[0])
+            }
+            this.store.sellConfiguration.map((sells) => {
+                 this.store.openOrders.push(sells)
+                 this.store.allConfigs.push(sells.at)
+                 return null
+            })
+            this.store.showChart = <Chart data={[12, 8, ...this.store.allConfigs]} coin={ this.store.globalCoin } store = { this.store }/>
+            this.store.socket.emit('market_summary', {'coin': this.store.globalCoin});
+            this.store.socket.on('market_summary', (backCoins)=>{
+                  console.log(backCoins)
+                  this.store.volume = backCoins.Volume.toString().substring(0, 10)
+                  this.store.low = backCoins.Low
+                  this.store.high = backCoins.High
+                  this.store.last = backCoins.Last
+            })
+      }else{
+            alert("Please enter coin!")
       }
-      this.store.sellConfiguration.map((sells) => {
-           return this.store.openOrders.push(sells)
-      })
 
   }
   showContent(e){
-      const coinValue = e.target.value
+      let coinValue = e.target.value
+      coinValue = coinValue.trim()
       if(coinValue !== ''){
-            if (e.which === 13) {
-                  const coins = ['btc', 'gld', 'ugx', 'gbg']
-                  if (coins.indexOf(coinValue) !== -1) {
-                        this.setState({contentShowed: true})
-                  }else{
-                        this.setState({contentShowed: false})
-                  }
-            }
-      }else{
+            this.store.globalCoin = coinValue
       }
   }
   createNewSell(){
       let rand = randomize(10);
-      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%', time: '9:23:11', todon: '0.0000000', filled: '0.0000000', rem: '0.0000000', status: 'closed'})
+      let d = new Date()
+      let h = d.getHours()
+      let m = d.getMinutes()
+      let s = d.getSeconds()
+      let currentTime = h + ':' + m + ':' + s
+      this.store.sellConfiguration.push({sell: 0, 
+                                         at: 0, 
+                                         id: rand, 
+                                         todo: 'SELL', 
+                                         put: '%', 
+                                         time: currentTime, 
+                                         todon: '0.0000000', 
+                                         filled: '0.0000000', 
+                                         rem: '0.0000000', 
+                                         status: 'open'})
   }
   removeLastSell(){
       this.store.sellConfiguration.pop()
@@ -50,19 +74,18 @@ class App extends Component {
       let openOrders = []
       let closedOrders = []
 
+      if(this.store.showChart){
+      
+      }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
             <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
             ))
-      let truckSellAndBuyMap = this.store.openOrders.map((sellsBuys) => (
-            <span key={sellsBuys.id}> sell: {sellsBuys.at} </span>
-            ))
-
-      let dMap = this.store.openOrders.map((d) => {
+      this.store.openOrders.map((d) => {
             if (d.status === 'closed') {
-                  closedOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: '9:23:11', todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
+                  closedOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: d.time, todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
                   return null
             }else if(d.status === 'open'){
-                  openOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: '9:23:11', todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
+                  openOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: d.time, todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
                   return null
             }else{
                   return null
@@ -85,14 +108,14 @@ class App extends Component {
       <center><input type="text" placeholder="COIN" className="coin-value top" onKeyUp={this.showContent.bind(this)}/></center>
       <center><button className="btn start top" onClick = {this.startGraph.bind(this)}>START</button></center>
       <div className="row top bom">
-      <div className="col-lg-4">Last</div>
-      <div className="col-lg-7 aright"><span className="fa fa-btc"></span> 0.000000553</div>
-      <div className="col-lg-4">Volume</div>
-      <div className="col-lg-7 aright"><span className="fa fa-btc"></span> 0.000055367</div>
-      <div className="col-lg-4">Low</div>
-      <div className="col-lg-7 aright"><span className="fa fa-btc"></span> 0.000000023</div>
-      <div className="col-lg-4">High</div>
-      <div className="col-lg-7 aright"><span className="fa fa-btc"></span> 0.000000553</div>
+      <div className="col-lg-3">Last</div>
+      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.last }</div>
+      <div className="col-lg-3">Volume</div>
+      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.volume }</div>
+      <div className="col-lg-3">Low</div>
+      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.low }</div>
+      <div className="col-lg-3">High</div>
+      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.high }</div>
       </div>
       <div className="top">
       <center><button className="btn gbna">CANCEL</button></center>
@@ -138,10 +161,9 @@ class App extends Component {
       <div className="row">
       <div className="col-lg-12 ">
       <div className="six top child">
-      <p>Track values</p>
-      <p>[ { truckSellAndBuyMap } ]</p>
-
-      <p>[ { dMap } ]</p>
+      <div className="kpad">
+      { this.store.showChart }
+      </div>
       </div>
       </div>
       </div>

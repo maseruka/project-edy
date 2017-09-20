@@ -292,3 +292,7 @@ input:focus{
 .time{
   text-align: right;
 }
+canvas{
+  margin-top: 10px;
+  height: 290px!important;
+}
