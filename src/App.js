@@ -21,6 +21,7 @@ class App extends Component {
       this.store.sellConfiguration.map((sells) => {
            return this.store.openOrders.push(sells)
       })
+
   }
   showContent(e){
       const coinValue = e.target.value
@@ -38,7 +39,7 @@ class App extends Component {
   }
   createNewSell(){
       let rand = randomize(10);
-      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%', time: '9:23:11', todon: '0.0000000', filled: '0.0000000', rem: '0.0000000'})
+      this.store.sellConfiguration.push({sell: 0, at: 0, id: rand, todo: 'SELL', put: '%', time: '9:23:11', todon: '0.0000000', filled: '0.0000000', rem: '0.0000000', status: 'closed'})
   }
   removeLastSell(){
       this.store.sellConfiguration.pop()
@@ -46,19 +47,33 @@ class App extends Component {
   render() {
       let openOrdersMap;
       let closedOrdersMap;
+      let openOrders = []
       let closedOrders = []
-            openOrdersMap = this.store.openOrders.map((open) => (
-                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
-                  ))
-            closedOrdersMap = closedOrders.map((open) => (
-                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
-                  ))
+
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
             <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
             ))
       let truckSellAndBuyMap = this.store.openOrders.map((sellsBuys) => (
             <span key={sellsBuys.id}> sell: {sellsBuys.at} </span>
             ))
+
+      let dMap = this.store.openOrders.map((d) => {
+            if (d.status === 'closed') {
+                  closedOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: '9:23:11', todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
+                  return null
+            }else if(d.status === 'open'){
+                  openOrders.push({id: d.id, buy: d.buy, at: d.at, todo: d.todo,time: '9:23:11', todon: '0.0000000',filled: '0.0000000', rem: '0.0000000'})
+                  return null
+            }else{
+                  return null
+            }
+      })
+      closedOrdersMap = closedOrders.map((open) => (
+                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem}/>
+                  ))
+      openOrdersMap = openOrders.map((open) => (
+                  <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem} stat={open.status}/>
+                  ))
     return (
       <div className="full container-fluid parent">
       <div className="row">
@@ -125,6 +140,8 @@ class App extends Component {
       <div className="six top child">
       <p>Track values</p>
       <p>[ { truckSellAndBuyMap } ]</p>
+
+      <p>[ { dMap } ]</p>
       </div>
       </div>
       </div>

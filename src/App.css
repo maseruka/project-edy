@@ -289,3 +289,6 @@ input:focus{
   font-size: 12.8px;
   opacity: .8;
 }
+.time{
+  text-align: right;
+}

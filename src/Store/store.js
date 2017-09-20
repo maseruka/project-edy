@@ -10,7 +10,8 @@ class Store{
                             time: '9:23:11', 
                             todon: '0.0000000',
                             filled: '0.0000000', 
-                            rem: '0.0000000'}]
+                            rem: '0.0000000',
+                        	status: 'closed'}]
 	@observable openOrders = []
 }
 
