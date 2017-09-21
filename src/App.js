@@ -4,8 +4,7 @@ import Store from './Store/store'
 import Dex from './comps/dex.js'
 import Orders from './comps/orders.js'
 import Chart from './comps/Chart.js'
-
-var randomize = require('randomatic');
+import ReactTooltip from 'react-tooltip'
 
 @observer
 class App extends Component {
@@ -48,7 +47,6 @@ class App extends Component {
       }
   }
   createNewSell(){
-      let rand = randomize(10);
       let d = new Date()
       let h = d.getHours()
       let m = d.getMinutes()
@@ -56,7 +54,7 @@ class App extends Component {
       let currentTime = h + ':' + m + ':' + s
       this.store.sellConfiguration.push({sell: 0, 
                                          at: 0, 
-                                         id: rand, 
+                                         id: this.store.genRand(), 
                                          todo: 'SELL', 
                                          put: '%', 
                                          time: currentTime, 
@@ -97,6 +95,7 @@ class App extends Component {
       openOrdersMap = openOrders.map((open) => (
                   <Orders key={open.id} todo={open.todo} time={open.time} todon={open.todon} filled={open.filled} rem={open.rem} stat={open.status}/>
                   ))
+
     return (
       <div className="full container-fluid parent">
       <div className="row">
@@ -107,19 +106,20 @@ class App extends Component {
       <center>Coin statistics</center>
       <center><input type="text" placeholder="COIN" className="coin-value top" onKeyUp={this.showContent.bind(this)}/></center>
       <center><button className="btn start top" onClick = {this.startGraph.bind(this)}>START</button></center>
-      <div className="row top bom">
-      <div className="col-lg-3">Last</div>
-      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.last }</div>
-      <div className="col-lg-3">Volume</div>
-      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.volume }</div>
-      <div className="col-lg-3">Low</div>
-      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.low }</div>
-      <div className="col-lg-3">High</div>
-      <div className="col-lg-8 aright"><span className="fa fa-btc"></span>{ this.store.high }</div>
       </div>
-      <div className="top">
+      <div className="child scroll tops hig">
+      <div className="row">
+      <div className="col-lg-12">
       <center><button className="btn gbna">CANCEL</button></center>
+      </div>
+      <div className="col-lg-12">
       <center><button className="btn gbna">CANCEL AND SELL</button></center>
+      </div>
+      <div className="col-lg-12 row ml">
+      <div className="col-lg-3 top">AT</div>
+      <div className="col-lg-8 top kal"><input type="text" className="pass" ref="show" data-tip ="todo" data-for="test" data-place="right"/><ReactTooltip id="test"/>  %</div>
+      <div className="col-lg-11 rite top soo r">above current price</div>
+      </div>
       </div>
       </div>
       </div>
@@ -130,7 +130,7 @@ class App extends Component {
       <center>Logs</center>
       <p className="small top">Any thing to log must be right here ok? cool go on and put it there</p>
       <p className="small">Any thing to log must be right here ok? cool go on and put it there</p>
-      <span className="light2"></span>
+      <span className="light"></span>
       </div>
       </div>
       </div>
@@ -148,10 +148,14 @@ class App extends Component {
       <div className="row">
       <div className="col-lg-12">
       <div className="seventy top child scroll">
-      <center>Sell Configuration</center>
+      <div className="dwn">
       { sellConfigurationMap }
       <p className="actions remo" onClick = { this.removeLastSell.bind(this)}><span className="fa fa-trash"></span> Remove sell</p>
       <p className="actions addo bog" onClick = { this.createNewSell.bind(this)}><span className="fa fa-plus"></span> Add sell</p>
+      </div>
+      <div className="upfix">
+      <center className="gob">Sell Configuration</center>
+      </div>
       </div>
       </div>
       </div>
@@ -162,6 +166,20 @@ class App extends Component {
       <div className="col-lg-12 ">
       <div className="six top child">
       <div className="kpad">
+      <div className="uptop">
+      <div className="row">
+      <div className="col-lg-2">Last</div>
+      <div className="col-lg-3"><span className="fa fa-btc"></span> { this.store.last }</div>
+      <div className="col-lg-2">Volume</div>
+      <div className="col-lg-3"><span className="fa fa-btc"></span> { this.store.volume }</div>
+      </div>
+      <div className="row">
+      <div className="col-lg-2">Low</div>
+      <div className="col-lg-3"><span className="fa fa-btc"></span> { this.store.low }</div>
+      <div className="col-lg-2">High</div>
+      <div className="col-lg-3"><span className="fa fa-btc"></span> { this.store.high }</div>
+      </div>
+      </div>
       { this.store.showChart }
       </div>
       </div>
@@ -170,15 +188,23 @@ class App extends Component {
       <div className="row">
       <div className="col-lg-6">
       <div className="six top child scroll">
-      <center>Open Orders</center>
+      <div className="dwn">
       { openOrdersMap }
+      </div>
+      <div className="upfix">
+      <center className="gob">Open Orders</center>
+      </div>
       <p className="bog"></p>
       </div>
       </div>
       <div className="col-lg-6">
       <div className="six top child scroll">
-      <center>Closed Orders</center>
+      <div className="dwn">
       { closedOrdersMap }
+      </div>
+      <div className="upfix">
+      <center className="gob">Closed Orders</center>
+      </div>
       <p className="bog"></p>
       </div>
       </div>

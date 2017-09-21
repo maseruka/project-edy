@@ -1,10 +1,35 @@
 import { observable } from 'mobx'
 import io from 'socket.io-client';
+var randomize = require('randomatic');
 class Store{
 
-	socket = io('http://192.168.43.149:9898');
+	socket = io();
 
-	@observable sellConfiguration = []
+	@observable sellConfiguration = [
+							{
+							sell: 60, 
+                            at: 0, 
+                            id: this.genRand(), 
+                            todo: 'SELL', 
+                            put: '%', 
+                            time: this.currentTime, 
+                            todon: '0.0000000', 
+                            filled: '0.0000000', 
+                            rem: '0.0000000', 
+                            status: 'open'
+                        },
+                        {
+							sell: 40, 
+                            at: 0, 
+                            id: this.genRand(), 
+                            todo: 'SELL', 
+                            put: '%', 
+                            time: this.currentTime, 
+                            todon: '0.0000000', 
+                            filled: '0.0000000', 
+                            rem: '0.0000000', 
+                            status: 'open'
+                        }]
 	@observable buyConfiguration  = [{
 							id: 1, 
 							buy: 0, 
@@ -31,6 +56,10 @@ class Store{
 		let s = d.getSeconds()
 		let currentTime = h + ':' + m + ':' + s
 		return currentTime
+	}
+	genRand(){
+      let rand = randomize(10);
+      return rand
 	}
 }
 

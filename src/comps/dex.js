@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { observer } from 'mobx-react'
+import ReactTooltip from 'react-tooltip'
+
 @observer
 export default class Dex extends Component {
   setSell(e){
@@ -28,9 +30,9 @@ export default class Dex extends Component {
     return (
     	<div className="row padd bot">
     		<div className="col-lg-3">{ this.props.todo }</div>
-    		<div className="col-lg-9 kal"><input type="text" className="pass" onBlur={this.setSell.bind(this)}/> { put }</div>
+    		<div className="col-lg-9 kal"><input type="text" className="pass" onBlur={this.setSell.bind(this)} ref="show" data-tip = { this.props.todo + " todo" } data-for="test" data-place="right"/><ReactTooltip id="test"/> { put }</div>
     		<div className="col-lg-3 top">AT</div>
-    		<div className="col-lg-9 top kal"><input type="text" className="pass" onBlur={this.setPer.bind(this)}/> %</div>
+    		<div className="col-lg-9 top kal"><input type="text" className="pass" onBlur={this.setPer.bind(this)} ref="show2" data-tip = { this.props.todo + " todo2" } data-for="test2" data-place="right"/><ReactTooltip id="test2"/> %</div>
     		<div className="col-lg-12 rite top soo">above current price</div>
     	</div>
     	);

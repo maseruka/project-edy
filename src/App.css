@@ -129,6 +129,7 @@ input:focus{
 .kal{
   border-radius: 5px;
   background: #161718;
+  border: 1px solid #161718;
 }
 .kal2{
   border-radius: 5px;
@@ -191,7 +192,10 @@ input:focus{
   height: 50vh;
 }
 .sixty{
-  height: 65vh;
+  height: 20vh;
+}
+.hig{
+  height: 40vh;
 }
 .six{
   height: 50vh;
@@ -200,7 +204,7 @@ input:focus{
   height: 70vh;
 }
 .fourty{
-  height: 35vh;
+  height: 40vh;
 }
 .thirty{
   height: 30vh;
@@ -294,5 +298,27 @@ input:focus{
 }
 canvas{
   margin-top: 10px;
-  height: 290px!important;
+  height: 29 0px!important;
+}
+.ml{
+  margin-left: 5px;
+}
+.uptop{
+  position: absolute;
+  width: 100%;
+}
+.upfix{
+  position: absolute;
+  top: 0;
+  width: 91.5%;
+  margin-left: -10px;
+  margin-top: 20px;
+  background: #1D1F20;
+  height: 40px;
+}
+.gob{
+  margin-top: 10px;
+}
+.dwn{
+  margin-top: 25px;
 }
