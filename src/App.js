@@ -13,6 +13,7 @@ class App extends Component {
       this.store = new Store()
   }
   startGraph(){
+      this.store.resetChart();
       this.store.openOrders = [] 
       this.store.allConfigs = []
       if(this.store.globalCoin !== ''){
@@ -28,11 +29,14 @@ class App extends Component {
             this.store.showChart = <Chart data={[12, 8, ...this.store.allConfigs]} coin={ this.store.globalCoin } store = { this.store }/>
             this.store.socket.emit('market_summary', {'coin': this.store.globalCoin});
             this.store.socket.on('market_summary', (backCoins)=>{
-                  console.log(backCoins)
-                  this.store.volume = backCoins.Volume.toString().substring(0, 10)
-                  this.store.low = backCoins.Low
-                  this.store.high = backCoins.High
-                  this.store.last = backCoins.Last
+                  if (backCoins.coin != this.store.globalCoin) {
+
+                  }else{
+                        this.store.volume = backCoins.data.Volume.toString().substring(0, 10)
+                        this.store.low = backCoins.data.Low
+                        this.store.high = backCoins.data.High
+                        this.store.last = backCoins.data.Last
+                  }
             })
       }else{
             alert("Please enter coin!")
@@ -47,24 +51,28 @@ class App extends Component {
       }
   }
   createNewSell(){
-      let d = new Date()
-      let h = d.getHours()
-      let m = d.getMinutes()
-      let s = d.getSeconds()
-      let currentTime = h + ':' + m + ':' + s
+      this.store.chart_const.ay.push(null);
       this.store.sellConfiguration.push({sell: 0, 
                                          at: 0, 
                                          id: this.store.genRand(), 
                                          todo: 'SELL', 
                                          put: '%', 
-                                         time: currentTime, 
+                                         time: this.store.currentTime, 
                                          todon: '0.0000000', 
                                          filled: '0.0000000', 
                                          rem: '0.0000000', 
                                          status: 'open'})
   }
   removeLastSell(){
-      this.store.sellConfiguration.pop()
+     if (this.store.sellConfiguration.length <= 0) {
+
+     }else{
+      this.store.sellConfiguration.pop();
+      this.store.openOrders.pop();
+      this.store.chart_const.ay.pop();
+      this.store.chart_data.datasets.pop();
+      this.store.chart_const_lines.pop();
+    }
   }
   render() {
       let openOrdersMap;
@@ -72,11 +80,8 @@ class App extends Component {
       let openOrders = []
       let closedOrders = []
 
-      if(this.store.showChart){
-      
-      }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
-            <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
+            <Dex key={sells.id} id={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells} myStore={this.store}/>
             ))
       this.store.openOrders.map((d) => {
             if (d.status === 'closed') {
@@ -117,7 +122,7 @@ class App extends Component {
       </div>
       <div className="col-lg-12 row ml">
       <div className="col-lg-3 top">AT</div>
-      <div className="col-lg-8 top kal"><input type="text" className="pass" ref="show" data-tip ="todo" data-for="test" data-place="right"/><ReactTooltip id="test"/>  %</div>
+      <div className="col-lg-8 top kal"><input type="text" className="pass" ref="show" data-tip ="Percentage above LAST rate to place CANCEL AND SELL order" data-for="test" data-place="right"/><ReactTooltip id="test"/>  %</div>
       <div className="col-lg-11 rite top soo r">above current price</div>
       </div>
       </div>
@@ -141,7 +146,7 @@ class App extends Component {
       <div className="col-lg-12">
       <div className="thirty top child">
       <center>Buy Configuration</center>
-      <Dex todo="BUY" put="btc" buy={this.store.buyConfiguration}/>
+      <Dex todo="BUY" put="btc" buy={this.store.buyConfiguration} myStore={this.store} sell={true}/>
       </div>
       </div>
       </div>

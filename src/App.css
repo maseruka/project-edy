@@ -298,6 +298,7 @@ input:focus{
 }
 canvas{
   margin-top: 10px;
+<<<<<<< HEAD
   height: 29 0px!important;
 }
 .ml{
@@ -321,4 +322,5 @@ canvas{
 }
 .dwn{
   margin-top: 25px;
+  height: 200px!important;
 }
