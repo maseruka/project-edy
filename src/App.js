@@ -14,6 +14,7 @@ class App extends Component {
       this.store = new Store()
   }
   startGraph(){
+      this.store.resetChart();
       this.store.openOrders = [] 
       this.store.allConfigs = []
       if(this.store.globalCoin !== ''){
@@ -48,6 +49,8 @@ class App extends Component {
       }
   }
   createNewSell(){
+      this.store.chart_const.ay.push(null);
+      console.log(this.store.chart_const.ay);
       let rand = randomize(10);
       let d = new Date()
       let h = d.getHours()
@@ -66,7 +69,14 @@ class App extends Component {
                                          status: 'open'})
   }
   removeLastSell(){
-      this.store.sellConfiguration.pop()
+     if (this.store.sellConfiguration.length <= 0) {
+
+     }else{
+      this.store.sellConfiguration.pop();
+      this.store.chart_const.ay.pop();
+      this.store.chart_data.datasets.pop();
+      this.store.chart_const_lines.pop();
+    }
   }
   render() {
       let openOrdersMap;
@@ -74,11 +84,8 @@ class App extends Component {
       let openOrders = []
       let closedOrders = []
 
-      if(this.store.showChart){
-      
-      }
       let sellConfigurationMap = this.store.sellConfiguration.map((sells) => (
-            <Dex key={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells}/>
+            <Dex key={sells.id} id={sells.id} todo={sells.todo} put={sells.put} dd = {sells.id} store={sells} myStore={this.store}/>
             ))
       this.store.openOrders.map((d) => {
             if (d.status === 'closed') {
@@ -141,7 +148,7 @@ class App extends Component {
       <div className="col-lg-12">
       <div className="thirty top child">
       <center>Buy Configuration</center>
-      <Dex todo="BUY" put="btc" buy={this.store.buyConfiguration}/>
+      <Dex todo="BUY" put="btc" buy={this.store.buyConfiguration} myStore={this.store} sell={true}/>
       </div>
       </div>
       </div>
