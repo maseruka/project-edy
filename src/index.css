@@ -1,4 +1,23 @@
-body{
-	background: #050505;
-	overflow: hidden;
+.hide{
+	display: none;
+}
+.graph-style{
+	background-color: red;
+}
+.sh-small{
+	font-size: 14px;
+}
+.so-small{
+	font-size: 12px;
+}
+.at-small{
+	font-size: 17px;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield;
 }

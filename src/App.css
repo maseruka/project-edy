@@ -1,20 +1,74 @@
-
 .see{
-  border: 1px solid #fff;
-}
+      border: 1px solid #000;
+    }
+    .full{
+      height: 100vh;
+    }
+    .potch{
+      padding: 15px;
+    }
+    .pifive{
+      height: 45vh;
+    }
+    .pifiv{
+      height: 47vh;
+    }
+    .pithree{
+      height: 27.6vh;
+    }
+    .piseven{
+      height: 68vh;
+    }
+    .patch{
+      margin-left: 1px;
+    }
+    .pitwo{
+      height: 18vh;
+    }
+    .pifour{
+      height: 24vh;
+    }
+    .pisix{
+      height: 44.5vh;
+    }
+    .petch{
+      margin-left: 15px!important;
+    }
+    .putch{
+      margin-bottom: 15px;
+    }
+    .paetch{
+      padding-left: 0;
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+    .paetch2{
+      padding: 0;
+    }
+    .hitch{
+      margin-left: 41px;
+    }
+    .mitch{
+      margin-top: 17px;
+    }
+    .smaa{
+      font-size: 14px;
+      position: relative;
+    }
+    .puch{
+      font-style: 12px;
+    }
 .mother{
-  height: auto;
+  height: 100vh;
   width: 100%;
   background: #191A1B;
   overflow: hidden;
 }
 .box{
-  margin-top: 20px;
-  margin-bottom: 20px;
   border-radius: 5px;
   background: #1D1F20;
+  padding: 6px 15px;
   color: #606a6f;
-  padding: 10px;
   box-shadow: 1px 3px 4px rgba(22,23,24, 1);
   -webkit-box-shadow: 1px 3px 4px rgba(22,23,24, 1);
 }
@@ -113,9 +167,11 @@ input:focus{
 }
 .small{
   font-size: 13px;
+  padding: 0!important;
+  margin: 0!important;
 }
-.padd{
-  padding: 20px;
+.pad{
+  padding: 10px;
 }
 .pass{
   width: 90%;
@@ -124,12 +180,22 @@ input:focus{
   font-weight: '300';
   border: none;
   background: none;
-  margin-left: -5px;
+  margin-left: -3px;
+}
+.pass2{
+  width: 85%;
+  padding: 5px;
+  color: #6dcee0;
+  font-weight: '300';
+  border: none;
+  background: none;
+  margin-left: -3px;
 }
 .kal{
   border-radius: 5px;
   background: #161718;
   border: 1px solid #161718;
+  margin-left: 25px;
 }
 .kal2{
   border-radius: 5px;
@@ -141,22 +207,13 @@ input:focus{
   margin-left: 5px;
 }
 .top{
-  margin-top: 20px;
+  margin-top: 8px;
 }
 .rite{
   text-align: right;
 }
 .rela{
   position: relative;
-}
-.light{
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  background: #63ff63;
-  height: 20px;
-  width: 20px;
-  border-radius: 20px;
 }
 .bot{
   border-bottom: 1px solid #191a1b;
@@ -176,7 +233,8 @@ input:focus{
   margin-left: 5px;
 }
 .order{
-  font-size: 18px;
+  font-size: 14.55px;
+  font-weight: 500;
 }
 
 
@@ -185,36 +243,13 @@ input:focus{
 
 /*new css*/
 
-.full{
-  min-height: 40vh;
-}
-.about{
-  height: 50vh;
-}
-.sixty{
-  height: 20vh;
-}
-.hig{
-  height: 40vh;
-}
-.six{
-  height: 50vh;
-}
-.seventy{
-  height: 70vh;
-}
-.fourty{
-  height: 40vh;
-}
-.thirty{
-  height: 30vh;
-}
 .tops{
   margin-top: 15px;
 }
 .bots{
   margin-bottom: 15px;
 }
+
 .parent{
   background: #191a1b;
 }
@@ -229,32 +264,33 @@ input:focus{
 .coin-value{
   text-transform: uppercase;
   text-align: center;
-  font-size: 36px;
-  width: 90%;
-  padding: 6px;
+  font-size: 35px;
+  width: 100%;
+  padding: 4px;
   background: #161718;
-  border-radius: 5px;
+  border-radius: 1px;
   border: 1px solid #6ccbdd;
   color: #6dcee0;
+  margin-top: 5px;
 }
 .start{
-  width: 90%;
+  width: 100%;
   font-size: 18px;
   padding: 6px;
   border-radius: 5px;
-  margin-top: 10px;
+  margin-top: 5px;
   background: #00bbf9;
   color: #333;
-  height: 50px;
+  height: 40px;
   font-weight: 500;
 }
 .gbna{
-  width: 90%;
-  margin-top: 15px;
-  padding: 12px!important;
+  width: 100%;
+  padding: 4px!important;
   font-weight: 600!important;
   background: #252829;
   color: #f64d43;
+  height: 40px;
 }
 .bom{
   margin-left: 2px;
@@ -264,7 +300,7 @@ input:focus{
 }
 .light2{
   position: absolute;
-  top: 83%;
+  bottom: 0;
   left: 0;
   background: #63ff63;
   height: 20px;
@@ -280,33 +316,21 @@ input:focus{
 .actions:hover{
   cursor: pointer;
 }
-.remo{
-  color: #e44739;
-}
-.addo{
-  color: #6cd7eb;
-}
-.bog{
-  margin-bottom: 50px;
-}
-.soo{
-  font-size: 12.8px;
-  opacity: .8;
-}
-.time{
-  text-align: right;
-}
 canvas{
   margin-top: 10px;
-<<<<<<< HEAD
-  height: 29 0px!important;
-}
-.ml{
-  margin-left: 5px;
+  height: 290px!important;
 }
 .uptop{
   position: absolute;
   width: 100%;
+  margin-left: 100px;
+  font-weight: 500;
+}
+.bogs{
+  font-size: 30px;
+}
+.kom{
+  margin-top: 10px;
 }
 .upfix{
   position: absolute;
@@ -317,10 +341,10 @@ canvas{
   background: #1D1F20;
   height: 40px;
 }
-.gob{
-  margin-top: 10px;
+
+.remo{
+  color: #f64d43;
 }
-.dwn{
-  margin-top: 25px;
-  height: 200px!important;
+.addo{
+  color: #6dcee0;
 }

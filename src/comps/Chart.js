@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Line} from 'react-chartjs-2';
 import { observer } from 'mobx-react';
 import {chart_options} from './data';
+let interval = null;
 
 @observer
 class App extends Component {
@@ -9,14 +10,12 @@ class App extends Component {
     super(props);
     this.store = this.props.store;
     this.socket = this.store.socket;
-    this.coin = this.props.coin;
-    this.state = {dats : 0};
+    this.state = {dats : 0, dots:this.store.dots};
   }
-  componentDidMount() {
-    this.socket.emit('coin', {name: this.coin});
+  componentWillMount() {
     this.socket.on('data', (data)=>{
-      if (data.coin != this.coin) {
-
+      if (data.coin !== this.store.workingCoin) {
+       console.log('Old Data for '+data.coin+' but current coin is '+this.store.workingCoin);
       }else{
         this.store.chart_const.value = data.data.result.Last;
          if (!this.store.chart_const.chartStarted) {
@@ -29,7 +28,6 @@ class App extends Component {
     })
   }
   componentDidUpdate() {
-     console.log(this.coin = this.props.coin);
     this.whenChartReachesMaximumAtY();
     this.getLineValues(this.store.chart_const.initValue);
   }
@@ -43,8 +41,8 @@ class App extends Component {
     }
   }
   updateChart(){
-
-    setInterval(()=>{
+    clearInterval(interval);
+    interval = setInterval(()=>{
      //   ++this.store.chart_const.timer;
      //   this.store.chart_const.secs = pad(parseInt(this.store.chart_const.timer%60));
      //   this.store.chart_const.mins = pad(parseInt(this.store.chart_const.timer/60));
@@ -110,21 +108,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Line data={this.store.chart_data} options={chart_options} />
+        <Line width={430} data={this.store.chart_data} options={chart_options}/>
       </div>
     );
   }
 }
 
-function pad(val){
-  var valString = val + "";
-  if(valString.length < 2){
-      return "0" + valString;
-  }
-  else{
-      return valString;
-  }
-}
 function const_vals_to_array(value) {
   let arr = [];
   for (var i = 0; i < 240; i++) {
